@@ -1,0 +1,1080 @@
+-- Create database university_sample;
+use university_sample;
+
+
+create table instructor (ID varchar(8),name varchar(30),dept_name varchar(20), salary int,
+             primary key (ID),
+        );
+-- drop table takes;
+create table takes (ID varchar(8),
+					course_id varchar(8),
+					sec_id varchar(20), 
+					semester varchar(8), 
+					year numeric(4,0), 
+					grade varchar(4)
+             primary key (ID, course_id, sec_id, semester, year),
+        );
+
+-- delete from instructor
+use university_sample;
+ select * from instructor
+
+ select * from instructor	where dept_name = 'Comp. Sci.';
+select * from instructor	where dept_name = 'Comp. Sci.' and salary > 70000;
+
+select dept_name,  avg (salary) from instructor group by dept_name;
+
+
+insert into instructor values ('10211', 'Smith', 'Biology', 66000);
+insert into instructor values ('22222', 'Einstein', 'Physics', 95000);
+insert into instructor values ('12121', 'Wu', 'Finance', 90000);
+insert into instructor values ('32343', 'El Said', 'History', 60000);
+insert into instructor values ('45565', 'Katz', 'Comp. Sci.', 75000);
+insert into instructor values ('98345', 'Kim', 'Elec, Eng.', 80000);
+insert into instructor values ('76766', 'Crick', 'Biology', 72000);
+insert into instructor values ('10101', 'Srinivasan', 'Comp. Sci.', 65000);
+insert into instructor values ('58583', 'Califieri', 'History', 62000);
+insert into instructor values ('83821', 'Brandt', 'Comp. Sci.', 92000);
+insert into instructor values ('15151', 'Mozart', 'Music', 40000);
+insert into instructor values ('33456', 'Gold', 'Physics', 87000);
+insert into instructor values ('76543', 'Singh', 'History', 87000);
+insert into instructor values ('86543', 'Iceta', 'History', null);
+
+
+
+create table teaches (ID varchar(8),
+					course_id varchar(8),
+					sec_id varchar(20), 
+					semester varchar(8), 
+					year numeric(4,0), 
+             primary key (ID, course_id, sec_id, semester, year),
+        );
+
+-- drop table teaches01;
+
+insert into teaches values ('10101', 'CS-101', '1', 'Fall', 2017);
+insert into teaches values ('10101', 'CS-315', '1', 'Spring', 2018);
+insert into teaches values ('10101', 'CS-347', '1', 'Fall', 2017);
+insert into teaches values ('12121', 'FIN-201', '1', 'Spring', 2018);
+insert into teaches values ('15151', 'MU-199', '1', 'Spring', 2018);
+insert into teaches values ('22222', 'PHY-101', '1', 'Fall', 2017);
+insert into teaches values ('32343', 'HIS-351', '1', 'Spring', 2018);
+insert into teaches values ('45565', 'CS-101', '1', 'Spring', 2018);
+insert into teaches values ('45565', 'CS-319', '1', 'Spring', 2018);
+insert into teaches values ('76766', 'BIO-101', '1', 'Summer', 2017);
+insert into teaches values ('76766', 'BIO-301', '1', 'Summer', 2018);
+insert into teaches values ('83821', 'CS-190', '1', 'Spring', 2017);
+insert into teaches values ('83821', 'CS-190', '2', 'Spring', 2017);
+insert into teaches values ('83821', 'CS-190', '2', 'Spring', 2018);
+insert into teaches values ('98345', 'EE-181', '1', 'Spring', 2017);
+
+
+select * from instructor, teaches
+select * from instructor , teaches where instructor.ID = teaches.ID 
+select name, course_id from instructor , teaches where instructor.ID = teaches.ID 
+
+
+insert into takes values ('00128', 'CS-101', '1', 'Fall', 2017, 'A');
+insert into takes values ('00128', 'CS-347', '1', 'Fall', 2017, 'A-');
+insert into takes values ('12345', 'CS-101', '1', 'Fall', 2017, 'C');
+insert into takes values ('12345', 'CS-190', '2', 'Spring', 2017, 'A');
+insert into takes values ('12345', 'CS-315', '1', 'Spring', 2018, 'A');
+insert into takes values ('12345', 'CS-347', '1', 'Fall', 2017, 'A');
+insert into takes values ('19991', 'HIS-351', '1', 'Spring', 2018, 'B');
+insert into takes values ('23121', 'FIN-201', '1', 'Spring', 2018, 'C+');
+insert into takes values ('44553', 'PHY-101', '1', 'Fall', 2017, 'B-');
+insert into takes values ('45678', 'CS-101', '1', 'Fall', 2017, 'F');
+insert into takes values ('45678', 'CS-101', '1', 'Spring', 2018, 'B+');
+insert into takes values ('45678', 'CS-319', '1', 'Spring', 2018, 'B');
+insert into takes values ('54321', 'CS-101', '1', 'Fall', 2017, 'A-');
+insert into takes values ('54321', 'CS-190', '2', 'Spring', 2017, 'B+');
+insert into takes values ('55739', 'MU-199', '1', 'Spring', 2017, 'A-');
+insert into takes values ('76543', 'CS-101', '1', 'Fall', 2017, 'A');
+insert into takes values ('76543', 'CS-319', '2', 'Spring', 2018, 'A');
+insert into takes values ('76653', 'EE-181', '1', 'Spring', 2017, 'C');
+insert into takes values ('98765', 'CS-101', '1', 'Fall', 2017, 'C-');
+insert into takes values ('98765', 'CS-315', '1', 'Spring', 2018, 'B');
+insert into takes values ('98988', 'BIO-101', '1', 'Summer', 2017, 'A');
+insert into takes values ('98988', 'BIO-301', '1', 'Fall', 2017, null);
+
+
+select * from takes;
+
+drop table department;
+create table department (dept_name varchar(12),
+					building varchar(10),
+					budget varchar(10), 
+        );
+
+insert into department values ('Comp. Sci.', 'Taylor', 100000)
+insert into department values ('Biology', 'Watson', 90000);
+insert into department values ('Elec. Eng.', 'Taylor', 85000);
+insert into department values ('Music', 'Packard', 80000);
+insert into department values ('Finance', 'Painter', 120000);
+insert into department values ('History', 'Painter', 50000);
+insert into department values ('Physics', 'Watson', 70000);
+
+select * from department;
+
+-- delete from department;
+-- drop table department;
+
+
+-- alter table department add instructor_name varchar(12);
+
+-- alter table department drop instructor_name     
+
+select namefrom instructor;
+select dept_namefrom instructor;
+
+select distinct dept_name	from instructor
+
+-- select  'A'from instructor;
+
+select ID, name, salary/12 as monthly_salary from instructor
+
+
+select namefrom instructorwhere dept_name = 'Comp. Sci'
+
+select * from instructor where dept_name = 'Comp. Sci.'
+
+select *from instructorwhere dept_name = 'Comp. Sci.'  and salary > 70000
+
+
+select * from instructor, teaches
+
+select * from instructor , teacheswhere instructor.ID = teaches.ID 
+
+select name, course_idfrom instructor , teacheswhere instructor.ID = teaches.ID 
+
+select name, course_idfrom instructor , teacheswhere instructor.ID = teaches.ID and  instructor. dept_name = 'History'
+
+
+select distinct T.namefrom instructor as T, instructor as S
+where T.salary > S.salary and S.dept_name = 'Comp. Sci.';
+
+select distinct T.namefrom instructor as T, instructor as S
+where T.salary > S.salary and S.dept_name = 'Comp. Sci.';
+
+select * from instructor  where name like '%iniv%';
+
+select distinct name	from    instructor		order by name
+
+select * from  instructororder by salary asc
+
+select *from instructorwhere salary between 90000 and 100000
+
+
+select instructor.name, teaches.course_idfrom instructor, teacheswhere (instructor.ID, dept_name) = ('101001', 'Biology');
+
+select * from teaches;
+select * from instructor;
+
+-- select * from instructor where CAST(name as varchar(100)) = 'LiteralValue'
+
+select * from instructorwhere salary is not null
+
+select avg (salary)from instructorwhere dept_name= 'Comp. Sci.';
+
+select count(distinct ID)from teacheswhere semester = 'Spring' and year = 2018;
+
+select count(*)from instructor;
+
+select dept_name, avg (salary) as avg_salaryfrom instructorgroup by dept_name;
+
+select dept_namefrom instructorgroup by dept_name;
+
+
+select dept_name, avg (salary) as avg_salary
+from instructor
+group by dept_name
+having avg (salary) > 42000;
+
+select dept_name, avg (salary) as avg_salary
+from instructor
+group by dept_name;
+
+
+create table section (course_id varchar(8),
+					sec_id varchar(8),
+					semester varchar(20), 
+					year numeric(4,0), 
+					building varchar(20), 
+					room_number numeric(4,0),
+					grade varchar(4)
+             primary key (course_id, sec_id, semester, year),
+        );
+
+use university_sample
+
+alter table instructor add instr_column varchar(7)
+
+select * from instructor
+
+alter table instructor drop column instr_column
+
+insert into section values ('BIO-101', '1', 'Summer', 2017, 'Painter', 514, 'B')
+insert into section values ('BIO-301', '1', 'Summer', 2018, 'Painter', 514, 'A')
+insert into section values ('CS-101', '1', 'Fall', 2017, 'Packard', 101, 'H')
+insert into section values ('CS-101', '1', 'Spring', 2018, 'Packard', 101, 'F')
+insert into section values ('CS-190', '1', 'Spring', 2017, 'Taylor', 3128, 'E')
+insert into section values ('CS-190', '2', 'Spring', 2017, 'Taylor', 3128, 'A')
+insert into section values ('CS-315', '1', 'Spring', 2018, 'Watson', 120, 'D')
+insert into section values ('CS-319', '1', 'Spring', 2018, 'Watson', 100, 'B')
+insert into section values ('CS-319', '2', 'Spring', 2018, 'Taylor', 3128, 'C')
+insert into section values ('CS-347', '1', 'Fall', 2017, 'Taylor', 3128, 'A')
+insert into section values ('EE-181', '1', 'Spring', 2017, 'Taylor', 3128, 'C')
+insert into section values ('FIN-201', '1', 'Spring', 2018, 'Packard', 101, 'B')
+insert into section values ('HIS-351', '1', 'Spring', 2018, 'Painter', 514, 'C')
+insert into section values ('MU-199', '1', 'Spring', 2018, 'Packard', 101, 'D')
+insert into section values ('PHY-101', '1', 'Fall', 2017, 'Watson', 100, 'A')
+
+use university_sample;
+select course_id  from section where semester = 'Fall' and year = 2017
+select course_id  from section where semester = 'Spring' and year = 2018
+
+(select course_id  from section where semester = 'Fall' and year = 2017)           
+union           
+(select course_id  from section where semester = 'Spring' and year = 2018)
+
+(select course_id  from section where semester = 'Fall' and year = 2017)           
+intersect           
+(select course_id  from section where semester = 'Spring' and year = 2018)
+
+(select course_id  from section where semester = 'Fall' and year = 2017)           
+except           
+(select course_id  from section where semester = 'Spring' and year = 2018)
+
+create table student (ID varchar(8),
+					name varchar(10),
+					dept_name varchar(20), 
+					tot_cred numeric(4,0)
+             primary key (ID),
+        );
+
+create table course (course_id varchar(8),
+					title varchar(40),
+					dept_name varchar(20), 
+					tot_cred numeric(2,0)
+             primary key (course_id),
+        );
+
+insert into course values ('BIO-101', 'Intro. to Biology', 'Biology', 4)
+insert into course values ('BIO-301', 'Genetics', 'Biology', 4)
+insert into course values ('BIO-399', 'Computational Biology', 'Biology', 3)
+insert into course values ('CS-101', 'Intro. to Computer Science', 'Comp. Sci.', 4)
+insert into course values ('CS-190', 'Game Design', 'Comp. Sci.', 4)
+insert into course values ('CS-315', 'Robotics', 'Comp. Sci.', 3)
+insert into course values ('CS-319', 'Image Processing', 'Comp. Sci.', 3)
+insert into course values ('CS-347', 'Database System Concepts', 'Comp. Sci.', 3)
+insert into course values ('EE-181', 'Intro. to Digital Systems', 'Elec. Eng.', 3)
+insert into course values ('FIN-201', 'Investment Banking', 'Finance', 3)
+insert into course values ('HIS-351', 'World History', 'History', 3)
+insert into course values ('MU-199', 'Music Video Production', 'Music', 3)
+insert into course values ('PHY-101', 'Physical Principles', 'Physics', 4)
+
+
+insert into student values ('00128', 'Zhang', 'Comp. Sci.', 102)
+insert into student values ('12345', 'Shankar', 'Comp. Sci.', 32)
+insert into student values ('19991', 'Brandt', 'History', 80)
+insert into student values ('23121', 'Chavez', 'Finance', 110)
+insert into student values ('44553', 'Peltier', 'Physics', 102)
+insert into student values ('45678', 'Levy', 'Physics', 102)
+insert into student values ('54321', 'Williamz', 'Comp. Sci.', 102)
+insert into student values ('55739', 'Sanchez', 'Music', 38)
+insert into student values ('70557', 'Snow', 'Physics', 0)
+insert into student values ('76543', 'Brown', 'Comp. Sci.', 58)
+insert into student values ('76653', 'Aoi', 'Elec. Eng.', 60)
+insert into student values ('98765', 'Bourikas', 'Elec. Eng.', 98)
+insert into student values ('98988', 'Tanaka', 'Biology', 120)
+
+select  ID, name, 'A'as  Literal from instructor
+select * from instructor
+-- select * from instructor T, instructor S
+
+select distinct course_id
+from section
+where semester = 'Fall' and year= 2017 and course_id in (select course_id
+from section
+where semester = 'Spring' and year= 2018);
+
+select distinct course_id
+from section
+where semester = 'Fall' and year= 2017 
+
+select course_id
+from section
+where semester = 'Spring' and year= 2018;
+
+select distinct name
+from instructor
+where  name  in ('Mozart', 'Einstein') 
+
+select distinct name
+from instructor
+
+select count (distinct ID)
+from takes
+where (course_id and sec_id and semester, year) in                                 
+(select course_id, sec_id, semester, year
+from teaches
+where teaches.ID= 10101);
+
+select  'A' 	from instructor
+
+
+select count(distinct ID)
+from takes  where course_id in 
+(select course_id
+from teaches where ID  = '10101')
+
+(select count(distinct ID)
+from takes  where sec_id in 
+(select course_id, sec_id
+from teaches where ID  = '10101'))
+union
+((select count(distinct ID)
+from takes  where semester in 
+(select semester
+from teaches where ID  = '10101'))
+intersect
+(select count(distinct ID)
+from takes  where year in 
+(select year
+from teaches where ID  = '10101')))
+
+where (course_id, sec_id, semest,er, year) in                                 
+(select course_id, sec_id, semester, year
+from teaches
+where teaches.ID= 10101);
+
+select distinct T.name
+from instructor as T, instructor as S
+where T.salary > S.salary and S.dept name = 'Biology' and A.salary > B.salary;
+
+
+select A.name
+from instructor A, instructor B where B.dept_name = 'Biology' and A.salary > B.salary;
+
+-- use university_sample
+
+select name
+from instructor
+where salary > some (select salary
+                                     from instructor
+                                     where dept_name = 'Biology');
+
+select * from instructor  where dept_name = 'Biology'
+select *
+from instructor
+where salary > all (select salary
+                                     from instructor
+                                     where dept_name = 'Biology');
+
+select course_id   from section as S   where semester = 'Fall' and year = 2017 and                
+exists  (select *                            
+from section as T                            
+where semester = 'Spring' and year= 2018                                         
+and S.course_id = T.course_id);
+
+Select course_id from section where semester = 'Fall' and year = 2017 and course_id in 
+(Select course_id from section where semester = 'Spring' and year = 2018)
+
+Select course_id from section where semester = 'Fall' and year = 2017 
+Select course_id from section where semester = 'Spring' and year = 2018
+
+Select course_id from section T where semester = 'Fall' and year = 2017 and exists (
+Select course_id from section S where semester = 'Spring' and year = 2018 and T.course_id = S.course_id)
+
+select count (distinct ID)
+from takes
+where course_id in                                 
+(select course_id
+                                 from teaches
+                                 where teaches.ID= 10101);
+
+use university_sample
+
+Select count (distinct ID) from takes where semester = 'Fall' and year = 2017 and exists (
+select course_id, sec_id, semester, year
+                                 from teaches
+                                 where teaches.ID = '10101' and takes.course_id = teaches.course_id 
+								 and takes.sec_id = teaches.sec_id 
+								 and takes.semester = teaches.semester
+								 and takes.year = teaches.year )
+
+select distinct S.ID, S.name
+from student as S
+where not exists ( (select course_id
+                                 from course
+                                 where dept_name = 'Biology')
+                               except
+                                 (select T.course_id
+                                   from takes as T
+                                   where S.ID = T.ID));
+
+select * from student 
+select * from course  where dept_name = 'Biology'
+
+select * from student  where  exists ((
+select course_id from course  where dept_name = 'Biology')
+except 
+(select T.course_id  from takes T where T.ID = student.ID));
+
+select * from takes;
+select * from student;
+select *  from course;
+
+select T.course_idfrom course as Twhere unique ( select R.course_id                           
+from section as R                          
+where T.course_id= R.course_id                                        
+and R.year = 2017);
+
+select course_id from course 
+where course_id in (select course_id from section where year = 2017);
+
+select dept_name, avg_salaryfrom ( select dept_name, avg (salary) as avg_salary           
+from instructor           
+group by dept_name)as T where  avg_salary > 42000;
+
+
+-- (select dept_name  from instructor  group by dept_name)
+
+select dept_name, avg_salary   from (select dept_name,  avg(salary) as avg_salary from instructor group by dept_name) as T where T.avg_salary  > 42000
+
+select dept_name, avg_salaryfrom ( select dept_name, avg (salary) 
+from instructor group by dept_name) 
+                as dept_avg (dept_name, avg_salary)
+    where avg_salary > 42000;
+
+select dept_name_001, avg_salary_001 from ( select dept_name, avg (salary) 
+from instructor group by dept_name) 
+                as dept_avg (dept_name_001, avg_salary_001)
+    where avg_salary_001 > 42000;
+
+
+use university_sample
+
+with max_budget (value) as              
+	(select max(convert(int, budget))              
+	from department)     
+select department.dept_name     
+from department, max_budget     
+where department.budget = max_budget.value;
+
+select * from department;
+
+with max_budget as 
+(select  max(convert(int, budget)) as budget from department)
+select department.dept_name, department.budget from department, max_budget 
+where department.budget = max_budget.budget
+
+
+select dept_name, budget from (select  dept_name, max(convert(int, budget)) as budget from department group by dept_name)  as T 
+where budget = (select  max(convert(int, budget)) from department)
+
+with max_budget as 
+(select  max(convert(int, budget)) as budget from department)
+select department.dept_name, department.budget from department, max_budget where department.budget = max_budget.budget
+
+select dept_name,              
+( select count(*)                 
+from instructor                
+where department.dept_name = instructor.dept_name)             
+as num_instructorsfrom department;
+
+select count(*)                 
+from instructor                
+ 
+select * from instructor
+
+select 
+( select count(*)                 
+from instructor where instructor.dept_name = department.dept_name) as num_instructors  from  department;
+
+
+
+select * from instructor, department where department.dept_name = instructor.dept_name
+
+select * from instructor, department
+
+use university_sample
+
+-- 21/10/2024
+
+insert into instructor values ('10211', 'Smith', 'Biology', 66000);
+insert into instructor values ('22222', 'Einstein', 'Physics', 95000);
+insert into instructor values ('12121', 'Wu', 'Finance', 90000);
+insert into instructor values ('32343', 'El Said', 'History', 60000);
+insert into instructor values ('45565', 'Katz', 'Comp. Sci.', 75000);
+insert into instructor values ('98345', 'Kim', 'Elec, Eng.', 80000);
+insert into instructor values ('76766', 'Crick', 'Biology', 72000);
+insert into instructor values ('10101', 'Srinivasan', 'Comp. Sci.', 65000);
+insert into instructor values ('58583', 'Califieri', 'History', 62000);
+insert into instructor values ('83821', 'Brandt', 'Comp. Sci.', 92000);
+insert into instructor values ('15151', 'Mozart', 'Music', 40000);
+insert into instructor values ('33456', 'Gold', 'Physics', 87000);
+insert into instructor values ('76543', 'Singh', 'History', 87000);
+insert into instructor values ('86543', 'Iceta', 'History', null);
+
+select * from instructor;
+
+delete from instructor 
+
+delete from instructor                     
+where dept_name= 'Finance';
+
+delete from instructor                     
+where dept_name in (select dept_name                                                        
+from department                                                        
+where building = 'Watson');
+
+delete from instructor
+where salary < (select avg (salary) 
+                           from instructor);
+select * from course;
+insert into course             
+values ('CS-437', 'Database Systems', 'Comp. Sci.', 4);
+
+delete from course                     
+where course_id= 'CS-437';
+
+insert into course (course_id, title, dept_name, tot_cred)             
+values ('CS-437', 'Database Systems', 'Comp. Sci.', 4);
+
+insert into course (course_id, title, dept_name)             
+values ('CS-439', 'Database Management Systems', 'Comp. Sci.');
+
+select * from instructor;
+delete from instructor;
+
+insert into instructor	
+select ID, name, dept_name, 18000        
+from   student          
+where   dept_name = 'Music' and tot_cred > 144; 
+
+insert into student              
+values ('55740', 'Taylor', 'Music', 146);
+
+
+
+select * from instructor
+
+update instructor               
+set salary = salary * 1.05
+
+update student S    
+set tot_cred = (select sum(tot_cred)                              
+from takes, course                              
+where takes.course_id = course.course_id  and                                          
+S.ID = takes.ID and                             				  
+takes.grade <> 'F' and                                          
+takes.grade is not null);
+
+update student      
+set tot_cred = (select SUM(tot_cred) from (select  takes.ID, course_id, sec_id, semester, year, grade  
+from student , takes WHERE student.ID = takes.ID) T, 
+course where T.course_id = course.course_id and T.grade != 'F' 
+and T.grade is not null) 
+
+!= or <>
+
+select * from student;
+
+select name, course_idfrom  student, takeswhere student.ID = takes.ID;
+select * from student
+select * from course
+
+select * from takes
+
+select name, course_idfrom  student, takeswhere student.ID = takes.ID;
+select * from course;
+
+select *from  student join takes on student.ID  = takes.ID
+
+
+use university_Sample
+
+select name, course_idfrom student join takes on student.ID = takes.ID;
+
+
+select * from course
+
+select * from prereq
+
+select * from (select name, course_idfrom student join takes on student.ID = takes.ID) T, course       
+where T.course_id = course.course_id;
+
+
+create table prereq (course_id varchar(8),
+					prereq_id varchar(8),
+             primary key (course_id, prereq_id),
+        );
+
+insert into prereq values ('BIO-301', 'BIO-101');
+insert into prereq values ('CS-190', 'CS-101');
+insert into prereq values ('CS-347', 'CS-101');
+insert into prereq values ('MS-111', 'MS-112');
+
+
+select * from prereq;
+
+select * from course join prereq on course.course_id = prereq.course_id
+-- select * from course inner join prereq on course.course_id = prereq.course_id
+select * from course left outer join prereq on course.course_id = prereq.course_id
+select * from course right outer join prereq on course.course_id = prereq.course_id
+select * from course full outer join prereq on course.course_id = prereq.course_id
+
+select * from course inner join prereq oncourse.course_id = prereq.course_id
+
+-- create view
+create view 
+faculty  
+as  
+select ID, name, dept_name  from instructor;
+
+select * from instructor;
+insert into instructor values ('30765', 'Green', 'Music', null)
+select * from instructor where name = 'Green'
+
+
+select name                
+from faculty                
+where dept_name = 'Biology'
+
+GO
+
+create view 
+  departments_total_salary(dept_name, total_salary) as       
+  select dept_name, sum (salary)  from instructor      group by dept_name;
+
+  select * from departments_total_salary;
+  GO
+  create view physics_fall_2017 as   
+  select course.course_id, sec_id, building, room_number   
+  from course, section   where course.course_id = section.course_id              
+  and course.dept_name = 'Physics'and section.semester = 'Fall'              
+  and section.year = '2017';
+
+  select * from course;
+    select * from section;
+	insert into course values ('PHY-102', 'Quantum Physics', 'Physics', 4)
+		insert into section values ('PHY-102', '1', 'Fall', 2017, 'Watson',  234, 'B')
+
+
+  select * from physics_fall_2017;
+
+  GO
+  create view physics_fall_2017_watson as    
+  select course_id, room_number    
+  from physics_fall_2017   
+  where building= 'Watson';
+
+    select * from physics_fall_2017_watson;
+
+insert into faculty  values ('30765', 'Green', 'Music');
+
+select * from faculty where name = 'Green'
+
+create view instructor_info as      
+select ID, name, building       
+from instructor, department       
+where instructor.dept_name = department.dept_name;
+
+
+insert into instructor_info 
+             values ('69987', 'White', 'Taylor');
+
+create view history_instructors as   
+select *   from instructor   where dept_name= 'History';
+
+select  * from history_instructors
+insert into history_instructors values ('25566', 'Brown', 'Biology', 100000)
+
+select * from section
+
+drop table section
+
+create table section 
+                   (course_id varchar (8),
+                    sec_id varchar (8),
+                    semester varchar (6),
+                    year numeric (4,0),
+                    building varchar (15),
+                    room_number varchar (7),
+                    time_slot_id varchar (4), 
+                    primary key (course_id, sec_id, semester, year),
+                    check (semester in ('Fall', 'Winter', 'Spring', 'Summer')))
+
+insert into section values ('BIO-101', '1', 'Summer', 2017, 'Painter', 514, 'B')
+insert into section values ('BIO-301', '1', 'Summer', 2018, 'Painter', 514, 'A')
+insert into section values ('CS-101', '1', 'Fall', 2017, 'Packard', 101, 'H')
+insert into section values ('CS-101', '1', 'Spring', 2018, 'Packard', 101, 'F')
+insert into section values ('CS-190', '1', 'Spring', 2017, 'Taylor', 3128, 'E')
+insert into section values ('CS-190', '2', 'Spring', 2017, 'Taylor', 3128, 'A')
+insert into section values ('CS-315', '1', 'Spring', 2018, 'Watson', 120, 'D')
+insert into section values ('CS-319', '1', 'Spring', 2018, 'Watson', 100, 'B')
+insert into section values ('CS-319', '2', 'Spring', 2018, 'Taylor', 3128, 'C')
+insert into section values ('CS-347', '1', 'Fall', 2017, 'Taylor', 3128, 'A')
+insert into section values ('EE-181', '1', 'Spring', 2017, 'Taylor', 3128, 'C')
+insert into section values ('FIN-201', '1', 'Spring', 2018, 'Packard', 101, 'B')
+insert into section values ('HIS-351', '1', 'Spring', 2018, 'Painter', 514, 'C')
+insert into section values ('MU-199', '1', 'Spring', 2018, 'Packard', 101, 'D')
+insert into section values ('PHY-101', '1', 'Fall', 2017, 'Watson', 100, 'A')
+
+insert into section values ('MS-101', '1', 'March', 2017, 'Watson', 100, 'A')
+
+select * from instructor
+use university_sample;
+
+create type Dollars from numeric(4,0)   
+
+drop table department
+
+CREATE TYPE degree_level FROM varchar(10) ;
+
+      
+create table department          
+(dept_name varchar (20),          
+building varchar (15),          
+budget Dollars,
+value degree_level, 
+check (value in ('Fall', 'Winter', 'Spring', 'Summer')));
+
+create table student	
+(ID varchar (5),
+name varchar (20) not null,
+dept_name varchar (20),
+tot_cred numeric (3,0) default 0,
+primary key (ID))
+
+select * from student;
+
+create index studentID_index on student(ID)
+
+select * from  student where  ID = '12345'
+
+
+select * from instructor where name = 'X' or 'Y' = 'Y'
+
+select * from instructor where name = 'X\' or \'Y\' = \'Y'
+
+use university_sample
+
+GO
+
+CREATE FUNCTION dept_count (@dept_name VARCHAR(20))
+RETURNS INT
+AS
+BEGIN
+    DECLARE @d_count INT;
+    
+    SELECT @d_count = COUNT(*)
+    FROM instructor
+    WHERE instructor.dept_name = @dept_name;
+    
+    RETURN @d_count;
+END;
+
+
+GO
+CREATE FUNCTION instructor_of (@dept_name CHAR(20))
+RETURNS @instructor_table TABLE (
+    ID VARCHAR(5),
+    name VARCHAR(20),
+    dept_name VARCHAR(20),
+    salary NUMERIC(8, 2)
+)
+AS
+BEGIN
+    INSERT INTO @instructor_table (ID, name, dept_name, salary)
+    SELECT ID, name, dept_name, salary
+    FROM instructor
+    WHERE instructor.dept_name = @dept_name;
+
+    RETURN;
+END;
+
+
+GO
+
+CREATE PROCEDURE dept_count_proc 
+    @dept_name VARCHAR(20), 
+    @d_count INT OUTPUT
+AS
+BEGIN
+    SELECT @d_count = COUNT(*)
+    FROM instructor
+    WHERE instructor.dept_name = @dept_name;
+END;
+
+USE university_sample
+--- Calling a procedure
+DECLARE @output_variable INT;
+
+EXEC dept_count_proc @dept_name = 'Physics', @d_count = @output_variable ;
+
+-- Calling a procedure with parameters
+EXEC dept_count_proc @parameter1 = value1, @parameter2 = value2;
+
+-- Calling a procedure with output parameters
+DECLARE @output_variable INT;
+
+EXEC dept_count_proc @input_parameter = value, @output_parameter = @output_variable OUTPUT;
+
+-- Now you can use the output variable
+SELECT @output_variable;
+
+
+-- Loop ---
+DECLARE @n INT = 0;
+DECLARE @budget INT;
+
+DECLARE budget_cursor CURSOR FOR
+SELECT budget FROM department WHERE dept_name = 'Music';
+
+OPEN budget_cursor;
+
+FETCH NEXT FROM budget_cursor INTO @budget;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    SET @n = @n + @budget;
+    FETCH NEXT FROM budget_cursor INTO @budget;
+END;
+
+CLOSE budget_cursor;
+DEALLOCATE budget_cursor;
+
+-- @n now contains the sum of the budgets
+SELECT @n AS TotalBudget;
+
+-- Explanation
+-- Variable Declaration: DECLARE @n INT = 0; initializes the variable @n to 0.
+-- Cursor Declaration: DECLARE budget_cursor CURSOR FOR declares a cursor to iterate over the budgets of the ‘Music’ department.
+-- Cursor Operations: OPEN, FETCH NEXT, WHILE, CLOSE, and DEALLOCATE manage the cursor’s lifecycle and iterate through the result set.
+-- Accumulation: SET @n = @n + @budget; accumulates the budget values.
+-- This script will sum the budget values for the ‘Music’ department and store the result in the variable @n.
+
+
+-- Triggers
+GO
+CREATE TRIGGER setnull_trigger
+ON takes
+INSTEAD OF UPDATE
+AS
+BEGIN
+    IF UPDATE(grade)
+    BEGIN
+        UPDATE takes
+        SET grade = CASE 
+                        WHEN inserted.grade = ' ' THEN NULL 
+                        ELSE inserted.grade 
+                    END
+        FROM inserted
+        WHERE takes.id = inserted.id; -- Assuming 'id' is the primary key or unique identifier
+    END
+END;
+
+
+-- Explanation
+-- Trigger Definition: CREATE TRIGGER setnull_trigger ON takes INSTEAD OF UPDATE defines a trigger that fires instead of the update operation on the takes table.
+-- Condition Check: IF UPDATE(grade) checks if the grade column is being updated.
+-- Update Statement: The UPDATE statement sets the grade to NULL if it is a space, otherwise it retains the new value from the inserted table.
+-- FROM Clause: The FROM inserted clause is used to reference the new values being updated.
+-- This trigger will ensure that any update to the grade column in the takes table will set the grade to NULL if it is a space.
+
+GO
+CREATE TRIGGER credits_earned
+ON takes
+AFTER UPDATE
+AS
+BEGIN
+    UPDATE student
+    SET tot_cred = tot_cred + (
+        SELECT credits
+        FROM course
+        WHERE course.course_id = inserted.course_id
+    )
+    FROM inserted
+    JOIN deleted ON inserted.id = deleted.id
+    WHERE inserted.grade <> 'F'
+      AND inserted.grade IS NOT NULL
+      AND (deleted.grade = 'F' OR deleted.grade IS NULL);
+END;
+
+-- Explanation
+-- Trigger Definition: CREATE TRIGGER credits_earned ON takes AFTER UPDATE defines a trigger that fires after an update operation on the takes table.
+-- Condition Check: The WHERE clause in the UPDATE statement ensures that the trigger only updates the tot_cred if the new grade is not ‘F’ and is not null, and the old grade was ‘F’ or null.
+-- Using inserted and deleted Tables: In SQL Server, the inserted table holds the new values, and the deleted table holds the old values. These are used to check the conditions and perform the update.
+-- This trigger will update the tot_cred in the student table based on the conditions specified.
+
+
+-- In Microsoft SQL Server, you can achieve recursive queries using Common Table Expressions (CTEs)
+
+WITH rec_prereq AS (
+    SELECT course_id, prereq_id
+    FROM prereq
+    UNION ALL
+    SELECT rec_prereq.course_id, prereq.prereq_id
+    FROM rec_prereq
+    JOIN prereq ON rec_prereq.prereq_id = prereq.course_id
+)
+SELECT *
+FROM rec_prereq;
+
+
+SELECT ID, RANK() OVER (ORDER BY GPA DESC) AS s_rank
+FROM student_grades;
+
+-- Explanation
+-- RANK() Function: The RANK() function assigns a rank to each row within the result set.
+-- OVER Clause: The OVER (ORDER BY GPA DESC) clause specifies that the ranking should be done based on the GPA column in descending order.
+-- Alias: AS s_rank assigns the name s_rank to the ranking column.
+-- This query will rank students based on their GPA in descending order.
+
+SELECT ID, dept_name,
+       RANK() OVER (PARTITION BY dept_name ORDER BY GPA DESC) AS dept_rank
+FROM dept_grades
+ORDER BY dept_name, dept_rank;
+
+-- Explanation
+-- RANK() Function: The RANK() function assigns a rank to each row within the partition of the result set.
+-- OVER Clause: The OVER (PARTITION BY dept_name ORDER BY GPA DESC) clause specifies that the ranking should be done within each department (dept_name) based on the GPA column in descending order.
+-- Alias: AS dept_rank assigns the name dept_rank to the ranking column.
+-- ORDER BY Clause: The ORDER BY dept_name, dept_rank clause sorts the final result set by department name and then by the department rank.
+
+
+-- In Microsoft SQL Server, the NULLS LAST option is not directly supported in the ORDER BY clause. However, you can achieve the same effect by using a CASE statement within the ORDER BY clause.
+SELECT ID, 
+       RANK() OVER (ORDER BY 
+                    CASE 
+                        WHEN GPA IS NULL THEN 1 
+                        ELSE 0 
+                    END, 
+                    GPA DESC) AS s_rank
+FROM student_grades;
+
+-- Explanation
+-- RANK() Function: The RANK() function assigns a rank to each row within the result set.
+-- ORDER BY Clause: The CASE statement within the ORDER BY clause ensures that NULL values are treated as the lowest values and appear last when sorted in descending order.
+-- CASE WHEN GPA IS NULL THEN 1 ELSE 0 END: This part of the ORDER BY clause assigns a higher value to NULL entries, effectively pushing them to the end.
+-- GPA DESC: This part sorts the non-NULL GPA values in descending order.
+-- Alias: AS s_rank assigns the name s_rank to the ranking column.
+-- This query will rank students based on their GPA in descending order, with NULL values appearing last.
+
+
+SELECT ID, 
+       NTILE(4) OVER (ORDER BY GPA DESC) AS quartile
+FROM student_grades;
+
+-- Explanation
+-- NTILE(4) Function: The NTILE(4) function divides the result set into four approximately equal parts, or quartiles.
+-- OVER Clause: The OVER (ORDER BY GPA DESC) clause specifies that the partitioning should be done based on the GPA column in descending order.
+-- Alias: AS quartile assigns the name quartile to the resulting quartile column.
+-- This query will assign each student to one of four quartiles based on their GPA, with higher GPAs being in the lower-numbered quartiles.
+
+
+SELECT date, 
+       SUM(value) OVER (
+           ORDER BY date 
+           ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+       ) AS sum_value
+FROM sales;
+
+
+-- Explanation
+-- SUM() Function: The SUM() function calculates the sum of the value column.
+-- OVER Clause: The OVER clause specifies the window for the calculation.
+-- ORDER BY Clause: The ORDER BY date clause orders the rows by the date column.
+-- ROWS BETWEEN Clause: The ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING clause defines the window frame to include the current row, the row before it, and the row after it.
+-- Alias: AS sum_value assigns the name sum_value to the resulting column.
+
+SELECT account_number, date_time,
+       SUM(value) OVER (
+           PARTITION BY account_number 
+           ORDER BY date_time
+           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+       ) AS balance
+FROM transaction
+ORDER BY account_number, date_time;
+
+-- Explanation
+-- SUM() Function: The SUM() function calculates the cumulative sum of the value column.
+-- OVER Clause: The OVER clause specifies the window for the calculation.
+-- PARTITION BY Clause: The PARTITION BY account_number clause partitions the result set by account_number.
+-- ORDER BY Clause: The ORDER BY date_time clause orders the rows within each partition by the date_time column.
+-- ROWS BETWEEN Clause: The ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW clause defines the window frame to include all rows from the start of the partition to the current row.
+-- Alias: AS balance assigns the name balance to the resulting column.
+-- This query will calculate the running balance for each account, ordered by the transaction date and time.
+
+-- OLAP 
+
+SELECT item_name, color, size, SUM(number) AS total_number
+FROM sales
+GROUP BY CUBE(item_name, color, size);
+
+-- Explanation
+-- SUM() Function: The SUM(number) function calculates the total number of items.
+-- GROUP BY CUBE: The GROUP BY CUBE(item_name, color, size) clause generates a result set that includes all possible combinations of the specified columns, including subtotals and grand totals.
+-- Alias: AS total_number assigns the name total_number to the resulting sum column.
+-- This query will provide a summary of sales, including totals for each combination of item_name, color, and size, as well as subtotals and grand totals.
+
+
+SELECT item_name, color, size, 
+       SUM(number) AS total_number,
+       GROUPING(item_name) AS item_name_flag,
+       GROUPING(color) AS color_flag,
+       GROUPING(size) AS size_flag
+FROM sales
+GROUP BY CUBE(item_name, color, size);
+
+
+-- Explanation
+-- SUM() Function: The SUM(number) function calculates the total number of items.
+-- GROUPING() Function: The GROUPING() function returns a flag indicating whether a column is aggregated in the result set. It returns 1 if the column is aggregated and 0 if it is not.
+-- GROUP BY CUBE: The GROUP BY CUBE(item_name, color, size) clause generates a result set that includes all possible combinations of the specified columns, including subtotals and grand totals.
+-- Aliases: AS total_number, AS item_name_flag, AS color_flag, and AS size_flag assign names to the resulting columns.
+-- This query will provide a summary of sales, including totals for each combination of item_name, color, and size, as well as flags indicating which columns are aggregated.
+
+
+-- In Microsoft SQL Server, you can achieve similar functionality to Oracle’s DECODE function using the CASE statement.
+
+CASE 
+    WHEN GROUPING(item_name) = 1 THEN 'all'
+    ELSE item_name
+END
+
+
+-- Explanation
+-- CASE Statement: The CASE statement is used to perform conditional logic.
+-- GROUPING() Function: The GROUPING(item_name) function returns 1 if the item_name column is aggregated in the result set, and 0 otherwise.
+-- THEN Clause: If GROUPING(item_name) equals 1, the result is 'all'.
+-- ELSE Clause: If GROUPING(item_name) equals 0, the result is the value of item_name.
+-- This expression can be used within a SELECT statement to replace DECODE functionality.
+
+
+SELECT 
+    CASE 
+        WHEN GROUPING(item_name) = 1 THEN 'all'
+        ELSE item_name
+    END AS item_name_display,
+    color,
+    size,
+    SUM(number) AS total_number
+FROM sales
+GROUP BY CUBE(item_name, color, size);
+
+-- This query will display 'all' for the item_name column when it is aggregated.
+
+
+SELECT item_name, color, size, 
+       SUM(number) AS total_number
+FROM sales
+GROUP BY ROLLUP(item_name, color, size);
+
+-- Explanation
+-- SUM() Function: The SUM(number) function calculates the total number of items.
+-- GROUP BY ROLLUP: The GROUP BY ROLLUP(item_name, color, size) clause generates a result set that includes subtotals and grand totals for each combination of item_name, color, and size.
+-- Alias: AS total_number assigns the name total_number to the resulting sum column.
+-- This query will provide a summary of sales, including totals for each combination of item_name, color, and size, as well as subtotals and grand totals.
